@@ -1,55 +1,118 @@
-# Frontend for BIMsmart
-## providing ABI of smart contract
-Before running frontend it is neccessary to provide ABI in folder frontend.  
-This script [link]backend-brownie/scripts/update_frontend.py does it.  
-[Readme](README.md)
+# BIMsmart Frontend
 
-## .env
-To be able to send files to IPFS network you need to create .env according to .env.example file and provide essential keys for [link]https://fleek.co/storage/
+Frontend interface for interacting with the BIMsmart blockchain payment
+system.
 
-# Getting Started with Create React App
+The application allows users to interact with the smart contract, submit
+project progress data and monitor milestone-based payments.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This frontend is part of the BIMsmart prototype developed during the
+Chainlink Fall 2021 Hackathon.
 
-## Available Scripts
+------------------------------------------------------------------------
 
-In the project directory, you can run:
+# Role in the System
 
-### `yarn start`
+The frontend acts as the user interface for the BIMsmart architecture.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Responsibilities:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+• interacting with the smart contract\
+• submitting project progress data\
+• visualizing project milestones\
+• uploading project documentation to IPFS
 
-### `yarn test`
+The frontend communicates with:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-   the deployed smart contract
+-   the Chainlink oracle workflow
+-   decentralized storage (IPFS)
 
-### `yarn build`
+------------------------------------------------------------------------
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Architecture Position
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+User\
+↓\
+React Frontend\
+↓\
+Smart Contract (Ethereum)\
+↓\
+Chainlink Oracle\
+↓\
+External Adapter (progress evaluation)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The frontend itself does not evaluate project progress.\
+It only provides the interface for submitting data and interacting with
+the smart contract.
 
-### `yarn eject`
+------------------------------------------------------------------------
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Smart Contract ABI
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Before running the frontend, the **ABI of the deployed smart contract
+must be available**.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The ABI is automatically copied to the frontend by the following script:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+backend-brownie/scripts/update_frontend.py
 
-## Learn More
+Run this script after deploying the smart contract.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+------------------------------------------------------------------------
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Environment Configuration
+
+To upload project documentation to **IPFS**, the application requires
+API credentials.
+
+Create a `.env` file based on `.env.example` and provide the required
+keys.
+
+This prototype uses **Fleek Storage** as the IPFS provider.
+
+Documentation: https://fleek.co/storage/
+
+Example `.env` variables:
+
+REACT_APP_FLEEK_API_KEY= REACT_APP_FLEEK_API_SECRET=
+
+------------------------------------------------------------------------
+
+# Installation
+
+Install dependencies:
+
+yarn install
+
+------------------------------------------------------------------------
+
+# Running the Frontend
+
+Start the development server:
+
+yarn start
+
+The application will be available at:
+
+http://localhost:3000
+
+------------------------------------------------------------------------
+
+# Build for Production
+
+yarn build
+
+This creates an optimized production build in the `build/` directory.
+
+------------------------------------------------------------------------
+
+# Project Context
+
+This frontend is a prototype interface designed to demonstrate how
+blockchain-based escrow logic could automate milestone payments in
+construction projects.
+
+The concept was inspired by real-world experience in construction
+project management and explores how blockchain infrastructure could
+support transparent financial workflows in complex project delivery.
